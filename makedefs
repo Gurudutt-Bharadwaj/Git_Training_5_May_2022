@@ -1,0 +1,78 @@
+
+# Reference folders
+#
+
+# Binary Folder
+BINDIR = bin
+
+# Folder for storing object files
+OBJDIR = bin
+
+# Folder with header files
+INCDIR = inc
+
+# Folder for storing the source files
+SRCDIR = src
+
+# The consolidated include directories
+INCLUDE_PATH += -I$(INCDIR)
+
+# Generic variable that shall reference many
+# other variables
+ 
+CFLAGS += $(INCLUDE_PATH)
+
+# The source files to be compiled.
+# If you want to add any source files, use
+# the 'SRCFILES' variable and append the new
+# file name using '+=' sign
+
+SRCFILES += $(SRCDIR)/sll/SingleLinkedListLib.c
+SRCFILES += $(SRCDIR)/dll/DoubleLinkedListLib.c
+
+OBJFILES = $(addprefix $(OBJDIR)/, $(addsuffix .o, $(basename $(SRCFILES))))
+
+####### OBTAINING THE OBJECT FILE NAMES FROM SOURCE FILE NAME LIST #######
+
+# Remove the folder names from the list of source file names
+# SRC_FILENAMES_ONLY = $(notdir $(SRCFILES))
+
+# Now remove the '.c' extension from the list of source file names
+# (without folder names, the one obtained above)
+
+# BASE_FILENAMES_WITHOUT_EXT = $(basename $(SRC_FILENAMES_ONLY))
+
+# Add the object file suffix onto the extension stripped list of source file
+# names obtained above
+
+# OBJ_FILE_EXT_ADDED = $(addsuffix .o, $(BASE_FILENAMES_WITHOUT_EXT))
+
+# Add the object folder prefix onto the list of file names with object file
+# extensions, obtained above.
+
+# OBJFILES = $(addprefix $(OBJDIR)/, $(OBJ_FILE_EXT_ADDED))
+
+############ ARCHIVER OPTIONS ##############
+
+# Archive folder
+#
+ARDIR = bin
+
+# Archiver options
+#
+# Here is an explanation of the archiver options
+#
+# c : Create an archive
+# r : Add the specified files to the archive
+#
+
+ARFLAGS = -crs
+
+# Name of the archive file
+ARNAME = libdrv.a
+
+# Files to archive
+#
+ARCH_FILES = $(OBJDIR)/*.o
+
+#############################################
